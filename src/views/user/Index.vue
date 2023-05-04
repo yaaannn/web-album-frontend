@@ -20,7 +20,9 @@
                     </div>
                 </div>
             </div>
-            <div class="user-menu"></div>
+            <div class="user-menu">
+                <p>公开照片</p>
+            </div>
             <div class="user-content">
                 <div class="card-list">
                     <div class="card-box" v-for="(item, index) in photoList" :key="index">
@@ -177,26 +179,13 @@ body {
     box-shadow: 0 0 0 1px #eee;
     background-color: #fff;
 
-    .menu-right {
-        width: 160px;
-        display: flex;
-
-        div {
-            color: #fff;
-            width: 70px;
-            font-size: 12px;
-            text-align: center;
-
-            .data-title {
-                margin: 0;
-                color: #999;
-            }
-
-            .data-content {
-                margin: 0 0 5px 0;
-                color: #222;
-            }
-        }
+    p {
+        // margin: 0 0 0 20px;
+        // 居中
+        margin: 0 auto;
+        font-size: 16px;
+        font-weight: 600;
+        color: #ffc90c;
     }
 }
 

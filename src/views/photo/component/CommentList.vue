@@ -19,7 +19,7 @@
             <n-time class="comment-time" type="relative" :time="new Date(item.create_time * 1000)"></n-time>
             <div class="comment-btn">
                 <n-button v-if="userInfo.username" text @click="reply(item.id)">回复</n-button>
-                <n-button v-if="item.author.username === userInfo.username" text>
+                <n-button v-if="item.author.username === userInfo.username" text @click="deleteComment(item.id)">
                     删除
                 </n-button>
             </div>
@@ -42,7 +42,7 @@
                         <n-time class="reply-time" type="relative" :time="new Date(reply.create_time * 1000)"></n-time>
                     </div>
                     <div class="reply-btn">
-                        <n-button v-if="reply.author.username === userInfo.username" text>删除
+                        <n-button v-if="reply.author.username === userInfo.username" text @click="deleteReply(reply.id)">删除
                         </n-button>
                     </div>
                 </div>
@@ -55,18 +55,18 @@
 
     </div>
     <!-- 发表回复模态框 -->
-    <n-modal v-model:show="createReply" title="发表回复" preset="card" style="width: auto;">
+    <n-modal v-model:show="isReply" title="发表回复" preset="card" style="width: auto;">
         <div style="display: flex; align-items: center; ">
             <n-input style="width: 500px;" placeholder="在这里写点什么吧~" maxlength="255" show-count type="textarea"
-                :autosize="descSize" />
-            <n-button type="primary">发布</n-button>
+                v-model:value="replyForm.content" :autosize="descSize" />
+            <n-button type="primary" @click="createReply">发布</n-button>
         </div>
 
     </n-modal>
 </template>
 
 <script setup lang="ts">
-import { getCommentListAPI, createCommentAPI } from '@/apis/api/comment';
+import { getCommentListAPI, createCommentAPI, deleteCommentAPI, createReplyAPI, deleteReplyAPI } from '@/apis/api/comment';
 import CommonAvatar from "@/components/common-avatar/Index.vue";
 
 import { statusCode } from '@/utils/status-code';
@@ -76,7 +76,7 @@ import { storageData } from "@/utils/stored-data";
 
 import { NInput, NButton, NTime, NModal, useNotification } from "naive-ui";
 import { onBeforeMount, reactive, ref } from 'vue';
-import type { CommentType, createCommentType, } from '@/apis/types/comment-type';
+import type { CommentType, createCommentType, createReplyType, } from '@/apis/types/comment-type';
 import type { UserInfoType } from '@/apis/types/user-type';
 const notification = useNotification();
 const commentList = ref<Array<CommentType>>([]);
@@ -121,15 +121,58 @@ const createComment = () => {
         })
     }
 }
+
+const deleteComment = (id: number) => {
+    deleteCommentAPI(id).then(res => {
+        if (res.data.code === statusCode.success) {
+            notification.success({
+                title: '删除成功',
+                duration: 2000
+            });
+            getCommnetList(props.id);
+        }
+    })
+}
 // 发表回复
-const createReply = ref(false)
+const replyForm = reactive<createReplyType>({
+    comment_id: 0,
+    content: '',
+})
+const isReply = ref(false)
 const reply = (id: number) => {
-    // TODO
-    createReply.value = true;
-    console.log(id);
-    console.log(createReply.value);
-
-
+    isReply.value = true;
+    replyForm.comment_id = id;
+}
+const createReply = () => {
+    if (!replyForm.content) {
+        notification.error({
+            title: '回复内容不能为空',
+            duration: 2000
+        });
+    } else {
+        createReplyAPI(replyForm).then(res => {
+            if (res.data.code === statusCode.success) {
+                notification.success({
+                    title: '回复成功',
+                    duration: 2000
+                });
+                replyForm.content = '';
+                isReply.value = false;
+                getCommnetList(props.id);
+            }
+        })
+    }
+}
+const deleteReply = (id: number) => {
+    deleteReplyAPI(id).then(res => {
+        if (res.data.code === statusCode.success) {
+            notification.success({
+                title: '删除成功',
+                duration: 2000
+            });
+            getCommnetList(props.id);
+        }
+    })
 }
 
 // 获取评论列表

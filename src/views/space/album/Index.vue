@@ -47,10 +47,10 @@
             <cover-uploader :cover="albumInfo.cover" @finish="finishUpload"></cover-uploader>
             <!-- 表单内容 -->
             <n-form>
-                <n-form-item label="相册名称">
+                <n-form-item label="相册名称" required>
                     <n-input v-model:value="albumInfo.name" placeholder="请输入相册名称"></n-input>
                 </n-form-item>
-                <n-form-item label="相册描述">
+                <n-form-item label="相册描述" required>
                     <n-input v-model:value="albumInfo.desc" placeholder="请输入相册描述"></n-input>
                 </n-form-item>
 
@@ -66,10 +66,10 @@
         <cover-uploader :cover="createAlbumInfo.cover" @finish="finishUpload"></cover-uploader>
         <!-- 表单内容 -->
         <n-form>
-            <n-form-item label="相册名称">
+            <n-form-item label="相册名称" required>
                 <n-input v-model:value="createAlbumInfo.name" placeholder="请输入相册名称"></n-input>
             </n-form-item>
-            <n-form-item label="相册描述">
+            <n-form-item label="相册描述" required>
                 <n-input v-model:value="createAlbumInfo.desc" placeholder="请输入相册描述"></n-input>
             </n-form-item>
 

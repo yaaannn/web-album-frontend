@@ -41,6 +41,28 @@ const baseRoutes: Array<RouteRecordRaw> = [
         component: () => import("../views/user/Index.vue"),
     },
     {
+        path: "/admin",
+        name: "AdminHome",
+        component: () => import("../views/admin/home/Index.vue"),
+        children: [
+            {
+                path: "/admin/user",
+                name: "AdminUser",
+                component: () => import("../views/admin/user/Index.vue"),
+            },
+            {
+                path: "/admin/photo",
+                name: "AdminPhoto",
+                component: () => import("../views/admin/photo/Index.vue"),
+            },
+        ]
+    },
+    {
+        path: '/admin/login',
+        name: 'AdminLogin',
+        component: () => import("../views/admin/login/Index.vue"),
+    },
+    {
         path: '/404',
         name: '404',
         component: () => import("../views/result/page-not-found/Index.vue")

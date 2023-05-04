@@ -39,7 +39,7 @@ import CommonAvatar from "@/components/common-avatar/Index.vue";
 
 import { h, onBeforeMount, ref } from "vue";
 import { RouterLink } from "vue-router";
-import { Video, Collection, Setting, Male, Female, } from "@/icons";
+import { Video, Collection, Setting, Male, Female, Like, } from "@/icons";
 import { NMenu, NIcon } from "naive-ui";
 import type { UserInfoType } from "@/apis/types/user-type";
 import { storageData } from "@/utils/stored-data";
@@ -71,6 +71,20 @@ const menuOptions = [
             ),
         key: "photo",
         icon: renderIcon(Video, '#e3c0aa'),
+    },
+    {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: "Like",
+                    }
+                },
+                { default: () => "我的点赞" }
+            ),
+        key: "like",
+        icon: renderIcon(Like, '#e3c0aa'),
     },
     {
         label: () =>

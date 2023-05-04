@@ -8,6 +8,8 @@
                     <img :src="getResourceUrl(item.url)" alt="" class="cover" @click="goPhotoDetail(item.id)">
                     <div class="info">
                         <p class="title">{{ item.name }}</p>
+                        <p class="clicks" v-if="item.is_public">公开</p>
+                        <p class="clicks" v-else>私密</p>
                     </div>
                 </div>
                 <div class="my-upload-card-btn">

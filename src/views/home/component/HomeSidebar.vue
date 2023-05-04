@@ -37,6 +37,11 @@
                         <a href="https://github.com/wangzmgit/leaf" target="_blank">致谢优秀开源项目</a>
                     </span>
                 </div>
+                <div class="copyright">
+                    <span>
+                        <p style="cursor: pointer;" @click="goAdmin()">登录后台</p>
+                    </span>
+                </div>
             </div>
         </n-scrollbar>
 
@@ -86,6 +91,10 @@ const goSpace = (name: string) => {
     router.push({ name: name });
 }
 
+// 前往后台
+const goAdmin = () => {
+    router.push({ name: 'AdminLogin' });
+}
 
 onBeforeMount(() => {
     // getPartition();

@@ -39,5 +39,11 @@ export const spaceRoutes: RouteRecordRaw = {
             meta: { auth: true },
             component: () => import("../views/space/photo/Index.vue"),
         },
+        {
+            path: '/space/like',
+            name: 'Like',
+            meta: { auth: true },
+            component: () => import("../views/space/like/Index.vue"),
+        }
     ]
 }

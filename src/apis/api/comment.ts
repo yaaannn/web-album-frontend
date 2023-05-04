@@ -14,3 +14,13 @@ export const createCommentAPI = (Comment: createCommentType) => {
 export const createReplyAPI = (Reply: createReplyType) => {
     return requset.post('v1/comment/reply', Reply)
 }
+
+// 删除评论
+export const deleteCommentAPI = (comment_id: number) => {
+    return requset.get(`v1/comment/delete?comment_id=${comment_id}`)
+}
+
+// 删除回复
+export const deleteReplyAPI = (reply_id: number) => {
+    return requset.get(`v1/comment/reply/delete?reply_id=${reply_id}`)
+}

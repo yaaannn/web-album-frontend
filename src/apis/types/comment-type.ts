@@ -9,7 +9,7 @@ export interface CommentType {
 }
 
 export interface ReplyType {
-    id: string,
+    id: number,
     content: string,
     author: UserInfoType,
     create_time: number,

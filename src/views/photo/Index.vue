@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div class="photo" :style="initTheme()">
+    <div class="photo" :style="initTheme()" v-title :data-title="`${photoInfo!.name}_照片详情`">
         <HeaderBar class="header" />
         <div class="photo-main">
             <div class="content-left">
