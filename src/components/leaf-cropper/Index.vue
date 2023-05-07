@@ -4,7 +4,10 @@
             <input class="upload-input" ref="inputRef" type="file" accept="image/*" @change="imageChange">
             <div class="close-icon" @click="closeCropper">
                 <n-icon size="26">
-                    <close></close>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </n-icon>
             </div>
             <slot name="content" v-if="imgFile" :file="imgFile"></slot>
@@ -14,7 +17,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { NIcon } from 'naive-ui';
-import { Close } from "@/icons";
 
 const imgFile = ref<File>();
 const showCropper = ref(false);

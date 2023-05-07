@@ -3,9 +3,8 @@
     <div class="upload" v-title data-title="上传图片">
         <header-bar></header-bar>
         <div class="upload-container">
-            <n-menu class="upload-menu" :options="menuOptions" :default-value="defaultOption" />
             <div class="upload-router">
-                <router-view></router-view>
+                <upload-photo />
             </div>
         </div>
     </div>
@@ -13,49 +12,8 @@
 
 <script setup lang="ts">
 import HeaderBar from '@/components/header-bar/Index.vue';
-import { h, ref, onBeforeMount } from "vue";
-import { NIcon, NMenu } from "naive-ui";
-import { RouterLink, useRoute } from 'vue-router';
-import { Upload, Comment } from '@/icons';
-const route = useRoute();
-const defaultOption = ref('');//默认激活菜单
-function renderIcon(icon: any, color?: string) {
-    return () => h(NIcon, { color: color }, { default: () => h(icon) });
-}
-const menuOptions = [
-    {
-        label: () =>
-            h(
-                RouterLink,
-                {
-                    to: {
-                        name: "UploadPhoto",
-                    }
-                },
-                { default: () => "图片管理" }
-            ),
-        key: "upload",
-        icon: renderIcon(Upload),
-    },
-    {
-        label: () =>
-            h(
-                RouterLink,
-                {
-                    to: {
-                        name: "CommentManage",
-                    }
-                },
-                { default: () => "评论管理" }
-            ),
-        key: "comment",
-        icon: renderIcon(Comment),
-    },
-];
+import UploadPhoto from './upload-photo/Index.vue';
 
-onBeforeMount(() => {
-    // defaultOption.value = route.name as string;
-});
 </script>
 
 <style lang="less" scoped>
@@ -74,12 +32,6 @@ onBeforeMount(() => {
         margin: 20px auto;
     }
 
-    .upload-menu {
-        width: 220px;
-        height: 500px;
-        min-width: 200px;
-        background-color: #fff;
-    }
 
     .upload-router {
         flex: 1;

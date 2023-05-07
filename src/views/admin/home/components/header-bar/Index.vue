@@ -25,7 +25,7 @@ const router = useRouter();
 const logout = () => {
     storageData.remove("access_token_manage");
     storageData.remove('admin_info');
-    router.push({ name: 'Login' });
+    router.push({ name: 'Home' });
 }
 
 const adminInfo = reactive<AdminInfoType>({

@@ -51,6 +51,19 @@ const menuOptions = [
             ),
         key: "admin_photo",
     },
+    {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: "AdminComment",
+                    }
+                },
+                { default: () => '评论管理' }
+            ),
+        key: "admin_comment",
+    },
 ];
 
 const routeNameToKey = () => {
@@ -59,6 +72,8 @@ const routeNameToKey = () => {
             return "admin_user";
         case "AdminPhoto":
             return "admin_photo";
+        case "AdminComment":
+            return "admin_comment";
         default:
             return "";
     }

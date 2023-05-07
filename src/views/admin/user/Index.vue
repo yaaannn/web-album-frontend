@@ -12,6 +12,7 @@
                     <th>性别</th>
                     <th>邮箱</th>
                     <th>注册时间</th>
+                    <th>账号状态</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -23,17 +24,23 @@
                     </td>
                     <td>{{ item.username }}</td>
                     <td>{{ item.nickname }}</td>
-                    <td v-if="item.gender === '0'">男</td>
-                    <td v-else-if="item.gender === '1'">女</td>
-                    <td v-else>保密</td>
-
+                    <td>
+                        <span v-if="item.gender === '0'">男</span>
+                        <span v-else-if="item.gender === '1'">女</span>
+                        <span v-else>保密</span>
+                    </td>
                     <td>{{ item.email }}</td>
                     <td>
                         <n-time :time="new Date(item.create_time * 1000)" />
                     </td>
-
+                    <td>
+                        <span v-if="item.is_freeze === false">正常</span>
+                        <span v-else>冻结</span>
+                    </td>
                     <td class="btn-list">
                         <n-button text @click="deleteUser(item.id)">删除</n-button>
+                        <n-button v-if="item.is_freeze === false" text @click="freezeUser(item.id)">冻结</n-button>
+                        <n-button v-else text @click="freezeUser(item.id)">解冻</n-button>
                     </td>
                 </tr>
             </tbody>
@@ -46,7 +53,7 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { getUserListAPI, deleteUserAPI } from '@/apis/admin/api/admin';
+import { getUserListAPI, deleteUserAPI, freezeUserAPI } from '@/apis/admin/api/admin';
 import type { UserInfoType } from '@/apis/admin/types/user-type';
 import { getResourceUrl } from '@/utils/resource';
 import {
@@ -97,6 +104,20 @@ const deleteUser = (id: number) => {
         }
     }).catch(() => {
         message.error('删除失败');
+    });
+}
+
+// 冻结
+const freezeUser = (id: number) => {
+    freezeUserAPI(id).then((res) => {
+        if (res.data.code === statusCode.success) {
+            message.success('操作成功');
+            getUserList();
+        } else {
+            message.error(res.data.msg);
+        }
+    }).catch(() => {
+        message.error('冻结失败');
     });
 }
 

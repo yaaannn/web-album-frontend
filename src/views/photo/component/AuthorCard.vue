@@ -8,14 +8,6 @@
                 <p>{{ authorInfo.nickname }}</p>
                 <p>{{ authorInfo.regions }}</p>
             </div>
-            <div class="follow-btn">
-                <n-button size="small" v-if="1" type="primary">
-                    已关注
-                </n-button>
-                <n-button size="small" v-else type="error">
-                    关注
-                </n-button>
-            </div>
         </div>
     </div>
 </template>
@@ -24,7 +16,6 @@
 import { getResourceUrl } from "@/utils/resource";
 import CommonAvatar from "@/components/common-avatar/Index.vue";
 
-import { NButton } from "naive-ui";
 import type { UserInfoType } from "@/apis/types/user-type";
 import { ref } from "vue";
 const props = defineProps<{
@@ -80,11 +71,6 @@ const authorInfo = ref(Object.assign({}, props.author));
                     font-size: 12px;
                 }
             }
-        }
-
-        .follow-btn {
-            width: 80px;
-            text-align: center;
         }
     }
 }

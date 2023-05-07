@@ -25,6 +25,7 @@ export interface UploadPhotoInfoType {
     album_id?: null | number,
     url: string,
     is_public: boolean,
+    is_watermark?: boolean,
 }
 
 export interface UpdatePhotoInfoType {

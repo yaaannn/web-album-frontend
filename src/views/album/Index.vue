@@ -18,9 +18,7 @@
                         <span class="desc">简介: {{ item.desc }}</span>
                     </div>
                     <div class="card-right">
-                        <n-icon class="edit" size="20" @click="deletePhotoFromAlbum(item.id)">
-                            <delete></delete>
-                        </n-icon>
+                        <span class="edit" @click="deletePhotoFromAlbum(item.id)">删除</span>
                     </div>
 
                 </div>
@@ -55,8 +53,7 @@ import type { AlbumType } from "@/apis/types/album-type"
 import { statusCode } from '@/utils/status-code';
 import { getResourceUrl } from "@/utils/resource";
 
-import { NIcon, useNotification, NTime, NPagination } from 'naive-ui';
-import { Delete } from '@/icons';
+import { useNotification, NTime, NPagination } from 'naive-ui';
 import { useRoute, useRouter } from 'vue-router';
 const router = useRouter();
 const photoList = ref<Array<PhotoType>>([])
@@ -229,7 +226,7 @@ onBeforeMount(() => {
 
     .card-right {
         float: left;
-        width: 90px;
+        // width: 90px;
         height: 100%;
         text-align: center;
 

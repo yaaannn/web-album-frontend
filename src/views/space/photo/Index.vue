@@ -14,19 +14,9 @@
                 </div>
                 <div class="my-upload-card-btn">
                     <n-button text @click="modifyPhoto(item)">
-                        <template #icon>
-                            <n-icon>
-                                <edit></edit>
-                            </n-icon>
-                        </template>
                         编辑
                     </n-button>
                     <n-button text @click="deleteMyPhoto(item.id)">
-                        <template #icon>
-                            <n-icon>
-                                <delete></delete>
-                            </n-icon>
-                        </template>
                         删除
                     </n-button>
                 </div>
@@ -64,11 +54,10 @@ import type { AlbumType } from "@/apis/types/album-type";
 import { deletePhotoAPI, getMyPhotoAPI, updatePhotoInfoAPI, } from '@/apis/api/photo';
 import { listAlbumAPI, } from "@/apis/api/album";
 import type { UploadPhotoType } from '@/apis/types/photo-type';
-import { Delete, Edit } from '@/icons';
 import { statusCode } from '@/utils/status-code';
 import { getResourceUrl } from "@/utils/resource";
 
-import { NButton, NForm, NFormItem, NIcon, NInput, NModal, NPagination, NSelect, NSwitch, useNotification } from 'naive-ui';
+import { NButton, NForm, NFormItem, NInput, NModal, NPagination, NSelect, NSwitch, useNotification } from 'naive-ui';
 import { onBeforeMount, reactive, ref } from 'vue';
 import { useRouter } from "vue-router";
 const router = useRouter();

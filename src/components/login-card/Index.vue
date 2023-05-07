@@ -2,7 +2,10 @@
 <template>
   <div class="login-card">
     <n-icon size="20" class="card-close" v-show="props.close" @click="closeClick">
-      <close></close>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
     </n-icon>
     <div class="card-left"></div>
     <div class="card-right">
@@ -16,7 +19,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { NIcon } from 'naive-ui';
-import { Close } from '@/icons';
 import LoginForm from './component/LoginForm.vue'
 
 const emits = defineEmits(["close", "success"]);

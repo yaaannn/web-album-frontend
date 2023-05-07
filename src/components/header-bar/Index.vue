@@ -29,11 +29,6 @@
         </div>
         <!-- 投稿按钮 -->
         <n-button type="primary" class="upload-btn" @click="goPage('Upload')">
-          <template #icon>
-            <n-icon>
-              <upload></upload>
-            </n-icon>
-          </template>
           上传
         </n-button>
       </div>
@@ -47,8 +42,7 @@ import type { UserInfoType } from '@/apis/types/user-type';
 import { globalConfig } from "@/utils/global-config";
 
 import { storageData } from "@/utils/stored-data";
-import { NButton, NIcon } from "naive-ui";
-import { Upload } from "@/icons";
+import { NButton } from "naive-ui";
 import { onBeforeMount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import CommonAvatar from "../common-avatar/Index.vue";

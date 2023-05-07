@@ -5,11 +5,6 @@
             <img v-if="currentCover" class="cover" :src="getResourceUrl(currentCover)" alt="封面" />
             <n-upload-dragger v-else>
                 <div v-if="!uploading">
-                    <div style="margin-bottom: 12px">
-                        <n-icon size="48" :depth="3">
-                            <upload />
-                        </n-icon>
-                    </div>
                     <n-text style="font-size: 16px">
                         点击或拖拽图片到此处上传
                     </n-text>
@@ -30,7 +25,6 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Upload } from "@/icons";
 import { globalConfig } from "@/utils/global-config";
 import { getResourceUrl } from "@/utils/resource";
 

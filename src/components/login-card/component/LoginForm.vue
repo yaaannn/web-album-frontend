@@ -124,7 +124,7 @@ const sendLoginRequest = () => {
     // break;
     else {
       notification.error({
-        title: "请检查输入的用户名密码",
+        title: res.data.msg,
         duration: 3000,
       });
     }

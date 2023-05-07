@@ -13,6 +13,9 @@
             <n-form-item label="是否公开">
                 <n-switch v-model:value="photoInfo.is_public" />
             </n-form-item>
+            <n-form-item label="是否添加水印">
+                <n-switch v-model:value="photoInfo.is_watermark" />
+            </n-form-item>
             <n-form-item label="选择相册">
                 <n-select class="select" placeholder="选择相册" label-field="name" value-field="id" remote
                     v-model:value="photoInfo.album_id" :options="albumList" />
@@ -44,7 +47,8 @@ const photoInfo = reactive({
     desc: "",
     album_id: null,
     url: "",
-    is_public: true
+    is_public: true,
+    is_watermark: false,
 
 })
 

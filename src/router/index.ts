@@ -43,18 +43,27 @@ const baseRoutes: Array<RouteRecordRaw> = [
     {
         path: "/admin",
         name: "AdminHome",
+        meta: { admin: true },
         component: () => import("../views/admin/home/Index.vue"),
         children: [
             {
                 path: "/admin/user",
                 name: "AdminUser",
+                meta: { admin: true },
                 component: () => import("../views/admin/user/Index.vue"),
             },
             {
                 path: "/admin/photo",
                 name: "AdminPhoto",
+                meta: { admin: true },
                 component: () => import("../views/admin/photo/Index.vue"),
             },
+            {
+                path: "/admin/comment",
+                name: "AdminComment",
+                meta: { admin: true },
+                component: () => import("../views/admin/comment/Index.vue"),
+            }
         ]
     },
     {
@@ -96,6 +105,9 @@ router.beforeEach((to, from, next) => {
         } else {
             loginStore.setLoginState(true);
         }
+    } else if (to.meta.admin && !storageData.get('access_token_manage')) {
+        router.push({ name: 'AdminLogin' });
+        next();
     } else {
         next();
     }

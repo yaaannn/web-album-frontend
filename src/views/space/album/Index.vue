@@ -25,14 +25,10 @@
                     </span>
                 </div>
                 <div class="card-right">
-                    <n-icon class="edit" size="20" @click="beforeEdit(item)">
-                        <edit></edit>
-                    </n-icon>
+                    <span class="edit" @click="beforeEdit(item)">编辑</span>
                     <n-popconfirm negative-text="取消" positive-text="确认" @positive-click="deleteClick(item.id)">
                         <template #trigger>
-                            <n-icon class="edit" size="20">
-                                <delete></delete>
-                            </n-icon>
+                            <span class="edit">删除</span>
                         </template>
                         是否删除这个收藏夹
                     </n-popconfirm>
@@ -82,11 +78,10 @@
 <script setup lang="ts">
 import { createAlbumAPI, deleteAlbumAPI, updateAlbumInfoAPI, } from "@/apis/api/album";
 import type { AlbumType, CreateAlbumType, UpdateAlbumType } from '@/apis/types/album-type';
-import { Delete, Edit } from "@/icons";
 import { getResourceUrl } from "@/utils/resource";
 import { statusCode } from '@/utils/status-code';
 
-import { NButton, NDrawer, NDrawerContent, NForm, NFormItem, NIcon, NInput, NModal, NPopconfirm, NScrollbar, NTime, useNotification } from 'naive-ui';
+import { NButton, NDrawer, NDrawerContent, NForm, NFormItem, NInput, NModal, NPopconfirm, NScrollbar, NTime, useNotification } from 'naive-ui';
 import { onBeforeMount, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import CoverUploader from "./component/CoverUploader.vue";
@@ -298,7 +293,7 @@ onBeforeMount(() => {
 
 .card-right {
     float: left;
-    width: 90px;
+    // width: 90px;
     height: 100%;
     text-align: center;
 

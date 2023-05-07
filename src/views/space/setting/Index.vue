@@ -1,11 +1,12 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div class="setting-title">
         <div class="content" :style="themeStyle">
             <span ref="infoRef" :class="isInfo ? 'active-text' : ''" @click="setRouter(true)">
-                {{ t("space.basicInformation") }}
+                个人信息
             </span>
             <span ref="securityRef" :class="!isInfo ? 'active-text' : ''" @click="setRouter(false)">
-                {{ t("space.accountSecurity") }}
+                账号安全
             </span>
         </div>
     </div>
@@ -13,11 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
 import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 

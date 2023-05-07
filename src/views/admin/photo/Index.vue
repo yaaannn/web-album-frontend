@@ -19,7 +19,7 @@
                 <tr v-for="item in photoList">
                     <td>{{ item.id }}</td>
                     <td>
-                        <img class="cover" :src="getResourceUrl(item.url)" alt="视频封面">
+                        <img class="cover" :src="getResourceUrl(item.url)" alt="图片封面">
                     </td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.desc }}</td>
@@ -30,7 +30,7 @@
                         <n-time :time="new Date(item.create_time * 1000)" />
                     </td>
                     <td class="btn-list">
-                        <n-button text>删除</n-button>
+                        <n-button text @click="deletePhoto(item.id)">删除</n-button>
                     </td>
                 </tr>
             </tbody>
@@ -45,7 +45,7 @@
 
 import { onBeforeMount, ref } from 'vue';
 import { NTable, NButton, NCard, NTime, NPagination, useNotification } from 'naive-ui';
-import { getPhotoListAPI } from '@/apis/admin/api/admin';
+import { deletePhotoAPI, getPhotoListAPI } from '@/apis/admin/api/admin';
 import { getResourceUrl } from '@/utils/resource';
 import { statusCode } from '@/utils/status-code';
 import type { PhotoType } from '@/apis/admin/types/photo-type';
@@ -57,7 +57,7 @@ const page = ref(1);
 const count = ref(0);
 
 const photoList = ref<Array<PhotoType>>([]);
-const getVideoList = () => {
+const getPhotoList = () => {
     getPhotoListAPI(page.value, 5).then((res) => {
         if (res.data.code === statusCode.success) {
             count.value = res.data.total;
@@ -71,19 +71,34 @@ const getVideoList = () => {
     });
 }
 
-
+const deletePhoto = (id: number) => {
+    deletePhotoAPI(id).then((res) => {
+        if (res.data.code === statusCode.success) {
+            notification.success({
+                title: '删除成功',
+                duration: 5000,
+            })
+            getPhotoList();
+        }
+    }).catch(() => {
+        notification.error({
+            title: '删除失败',
+            duration: 5000,
+        })
+    })
+}
 
 //页码改变
 const pageChange = (target: number) => {
     page.value = target;
-    getVideoList();
+    getPhotoList();
 }
 
 
 
 
 onBeforeMount(() => {
-    getVideoList();
+    getPhotoList();
 })
 </script>
 

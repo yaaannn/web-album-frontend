@@ -1,9 +1,6 @@
 <template>
     <div class="header-bar">
         <div class="sidebar-title">
-            <n-icon class="menu-icon-btn" size="22">
-                <menu-outline></menu-outline>
-            </n-icon>
             <span>{{ globalConfig.title }}</span>
         </div>
         <div class="header-search"></div>
@@ -29,11 +26,6 @@
             </div>
             <!-- 投稿按钮 -->
             <n-button type="primary" class="upload-btn" @click="goPage('Upload')">
-                <template #icon>
-                    <n-icon>
-                        <upload></upload>
-                    </n-icon>
-                </template>
                 上传
             </n-button>
         </div>
@@ -42,14 +34,12 @@
 </template>
 
 <script setup lang="ts">
-// import { useI18n } from 'vue-i18n';
 import { onBeforeMount, ref } from 'vue';
 import { globalConfig } from "@/utils/global-config";
 import { storageData } from "@/utils/stored-data";
 
 import { useRouter } from 'vue-router';
-import { NButton, NIcon } from 'naive-ui';
-import { Upload, MenuOutline } from "@/icons";
+import { NButton } from 'naive-ui';
 import CommonAvatar from "@/components/common-avatar/Index.vue";
 import { getResourceUrl } from "@/utils/resource";
 import type { UserInfoType } from "@/apis/types/user-type";
@@ -57,10 +47,6 @@ import { useLoginStore } from '@/stores/login-store';
 import LoginDialog from "@/components/login-dialog/Index.vue";
 import { storeToRefs } from 'pinia';
 
-
-
-// i18n
-// const { t } = useI18n();
 
 const isLogin = ref(false);
 const router = useRouter();
@@ -125,17 +111,7 @@ onBeforeMount(() => {
         align-items: center;
         height: 100%;
         width: 220px;
-
-        .menu-icon-btn {
-            margin: 0 6px;
-            padding: 6px;
-            border-radius: 50%;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgba(0, 0, 0, .1);
-            }
-        }
+        padding-left: 20px;
     }
 
 
