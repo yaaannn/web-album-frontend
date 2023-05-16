@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <!-- eslint-disable vue/require-v-for-key -->
 <template>
     <n-card class="card">
@@ -35,13 +36,13 @@
 
 <script setup lang="ts">
 import type { CommentType } from '@/apis/admin/types/comment-type';
-import { NCard, NTable, NPagination, NTime, NButton } from 'naive-ui';
+import { NCard, NTable, NPagination, NTime, NButton, useNotification } from 'naive-ui';
 import { onBeforeMount, ref } from 'vue';
 import { getCommentListAPI } from '@/apis/admin/api/admin';
 import { statusCode } from '@/utils/status-code';
 const page = ref(1);
 const count = ref(0);
-
+const notification = useNotification();
 const commentList = ref<Array<CommentType>>([]);
 
 //页码改变
@@ -51,19 +52,21 @@ const pageChange = (target: number) => {
 }
 const getCommentList = () => {
     getCommentListAPI(page.value, 5).then((res) => {
-        console.log(res);
-
         if (res.data.code === statusCode.success) {
             commentList.value = res.data.data;
             count.value = res.data.count;
         }
-    }).catch((err) => {
-        console.log(err);
-    });
+    })
 }
 
 const deleteComment = (id: number) => {
     console.log(id);
+
+    notification.info({
+        title: "提示",
+        description: "暂时不支持删除评论",
+        duration: 2000
+    })
 }
 
 onBeforeMount(() => {

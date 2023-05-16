@@ -32,9 +32,11 @@ const uploadPicture = async () => {
         const file = await cropperRef.value.getFile();
         uploadFileAPI({
             name: "image-" + Date.now(),
-            action: "v1/public/upload",
+            action: "v1/public/upload/ipfs",
             file: file,
-            onProgress: () => { },
+            onProgress: () => {
+
+            },
             onError: () => {
                 emits("stateChange", "error");
             },

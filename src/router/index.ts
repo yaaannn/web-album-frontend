@@ -5,7 +5,7 @@ import store from '@/stores';
 import { useLoginStore } from '@/stores/login-store';
 import { spaceRoutes } from './space-routes';
 import { uploadRoutes } from './upload-routes';
-
+import { adminRoutes } from './admin-routes';
 const loginStore = useLoginStore(store);
 
 const baseRoutes: Array<RouteRecordRaw> = [
@@ -36,35 +36,14 @@ const baseRoutes: Array<RouteRecordRaw> = [
         component: () => import("../views/photo/Index.vue")
     },
     {
+        path: "/photo/list",
+        name: "PhotoList",
+        component: () => import("../views/photo-list/Index.vue")
+    },
+    {
         path: "/user/:uid",
         name: "User",
         component: () => import("../views/user/Index.vue"),
-    },
-    {
-        path: "/admin",
-        name: "AdminHome",
-        meta: { admin: true },
-        component: () => import("../views/admin/home/Index.vue"),
-        children: [
-            {
-                path: "/admin/user",
-                name: "AdminUser",
-                meta: { admin: true },
-                component: () => import("../views/admin/user/Index.vue"),
-            },
-            {
-                path: "/admin/photo",
-                name: "AdminPhoto",
-                meta: { admin: true },
-                component: () => import("../views/admin/photo/Index.vue"),
-            },
-            {
-                path: "/admin/comment",
-                name: "AdminComment",
-                meta: { admin: true },
-                component: () => import("../views/admin/comment/Index.vue"),
-            }
-        ]
     },
     {
         path: '/admin/login',
@@ -82,14 +61,9 @@ const baseRoutes: Array<RouteRecordRaw> = [
             name: "404"
         }
     },
-    {
-        path: '/test',
-        name: 'Test',
-        component: () => import("../views/test/Index.vue")
-    }
 ]
 
-const routes = baseRoutes.concat(spaceRoutes, uploadRoutes);
+const routes = baseRoutes.concat(spaceRoutes, uploadRoutes,adminRoutes);
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),

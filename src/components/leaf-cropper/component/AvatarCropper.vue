@@ -35,7 +35,7 @@ const uploadAvatar = async () => {
         const file = await cropperRef.value.getFile();
         await uploadFileAPI({
             name: "image",
-            action: "v1/public/upload",
+            action: "v1/public/upload/ipfs",
             file: file,
             onProgress: () => { },
             onError: () => {

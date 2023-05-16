@@ -71,6 +71,7 @@ import { getUserInfoByIdAPI } from '@/apis/api/user';
 import type { BasePhotoType } from '@/apis/types/photo-type';
 import type { UserInfoType } from '@/apis/types/user-type';
 import CommonAvatar from "@/components/common-avatar/Index.vue";
+import PictureItem from "@/components/picture-item/Index.vue";
 import HeaderBar from "@/components/header-bar/Index.vue";
 import { getResourceUrl } from "@/utils/resource";
 import { statusCode } from '@/utils/status-code';
@@ -243,6 +244,7 @@ body {
                 width: 100%;
                 height: 100%;
                 border-radius: 6px;
+                object-fit: contain;
             }
 
             .info {
@@ -269,6 +271,7 @@ body {
         }
     }
 }
+
 
 .page-box {
     padding: 0 0 20px 10px;

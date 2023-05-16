@@ -63,13 +63,13 @@ import { getPhotoInfoAPI } from '@/apis/api/photo';
 import type { PhotoType } from '@/apis/types/photo-type';
 import { statusCode } from '@/utils/status-code';
 import { getResourceUrl } from "@/utils/resource";
-
+import { useRouter } from 'vue-router';
 import { NIcon, NTime } from 'naive-ui';
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import AuthorCard from './component/AuthorCard.vue';
 import CommentList from './component/CommentList.vue';
-
+const router = useRouter();
 const route = useRoute();
 const id = parseInt(route.params.id.toString());
 const is_like = ref(false);
@@ -120,6 +120,13 @@ onBeforeMount(() => {
         is_like.value = res.data.data.is_like;
 
     })
+})
+
+onMounted(() => {
+
+    if (photoInfo.value?.status !== 0) {
+        router.push('/404');
+    }
 })
 </script>
 

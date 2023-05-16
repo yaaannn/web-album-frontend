@@ -105,6 +105,7 @@ const changeUpload = (status: string, data: any) => {
     .cover {
         width: 350px;
         height: 200px;
+        object-fit: contain;
     }
 
 }

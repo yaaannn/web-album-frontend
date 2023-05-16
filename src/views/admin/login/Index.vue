@@ -1,19 +1,18 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div class="login" v-title :data-title="`后台登录-${globalConfig.title}`">
-        <div class="login-right">
-            <div class="login-form">
-                <n-form :model="loginForm" label-placement="left" label-width="70">
-                    <n-form-item label="账号" required>
-                        <n-input placeholder="请输入账号" v-model:value="loginForm.username" />
-                    </n-form-item>
-                    <n-form-item label="密码" required>
-                        <n-input placeholder="请输入密码" v-model:value="loginForm.password" type="password" />
-                    </n-form-item>
-                </n-form>
-                <div class="login-btn">
-                    <n-button type="primary" @click="sendLoginRequest">登录</n-button>
-                </div>
+
+        <div class="login-form">
+            <n-form :model="loginForm" label-placement="left" label-width="70">
+                <n-form-item label="账号" required>
+                    <n-input placeholder="请输入账号" v-model:value="loginForm.username" />
+                </n-form-item>
+                <n-form-item label="密码" required>
+                    <n-input placeholder="请输入密码" v-model:value="loginForm.password" type="password" />
+                </n-form-item>
+            </n-form>
+            <div class="login-btn">
+                <n-button type="primary" @click="sendLoginRequest">登录</n-button>
             </div>
         </div>
     </div>
@@ -69,33 +68,19 @@ const sendLoginRequest = () => {
 <style lang="less" scoped>
 .login {
     display: flex;
+    position: absolute;
     width: 100%;
     height: 100vh;
 
-    .login-left {
-        width: 50%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--primary-color);
 
-        .illustration {
-            width: 80%;
-        }
-    }
 
-    .login-right {
-        width: 50%;
-        height: 100%;
-    }
 }
 
 .login-form {
-    .form-container {
-        box-sizing: border-box;
-        padding: 40px 30px 0 30px;
-    }
+    // 居中
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
 
     .login-btn {
         display: flex;

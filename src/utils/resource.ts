@@ -15,5 +15,6 @@ export const getResourceUrl = (originalUrl: string) => {
     }
 
     // 前后端不同源
-    return `http${globalConfig.https ? 's' : ''}://${globalConfig.domain}${originalUrl}`;
+    // return `http${globalConfig.https ? 's' : ''}://${globalConfig.domain}${originalUrl}`;
+    return `http://${globalConfig.ipfs_domain}${originalUrl}`;
 }

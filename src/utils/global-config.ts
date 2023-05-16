@@ -1,6 +1,7 @@
 const title = "网络相册";
 const https = false;
 const domain = "localhost:8000";
+const ipfs_domain = "localhost:8080/ipfs/";
 const mobile = "/mobile/";
 const mediaRoot = "http://127.0.0.1:8000"
 const maxImgSize = 10;//上传图片最大大小(单位M)
@@ -14,4 +15,5 @@ export const globalConfig = {
     maxImgSize: maxImgSize,
     maxVideoSize: maxVideoSize,
     mediaRoot: mediaRoot,
+    ipfs_domain: ipfs_domain
 }

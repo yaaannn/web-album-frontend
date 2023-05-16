@@ -6,17 +6,20 @@ export interface BasePhotoType {
     desc: string,
     url: string,
     create_time: number,
+    status:number,
 }
 
 export interface PhotoType extends BasePhotoType {
     click?: number,
     author: UserInfoType,
-    album: number | null
+    album: number | null,
+
 }
 
 export interface UploadPhotoType extends BasePhotoType {
     is_public: boolean,
-    album: number
+    album: number,
+    partition : number
 }
 
 export interface UploadPhotoInfoType {

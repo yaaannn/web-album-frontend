@@ -10,4 +10,5 @@ export interface PhotoType {
     clicks: number,
     author: UserInfoType,
     is_public: boolean,
+    status: number,
 }

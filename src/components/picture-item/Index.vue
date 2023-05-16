@@ -3,6 +3,7 @@
     <div class="picture-item" :style="initTheme()">
         <div class="img">
             <img :src="getResourceUrl(props.info.url)" alt="">
+            <!-- <img src="http://localhost:8080/ipfs/QmepiQufyaPZtCKqzXiSNmK9DNQBHKoKKwTDPzK4szfU9X" alt='' /> -->
         </div>
         <div class="picture-info">
             <span class="title" @click="goPhotoDetail(props.info.id)">{{ props.info.name }}</span>
@@ -25,7 +26,7 @@
 <script setup lang="ts">
 
 import CommonAvatar from "../common-avatar/Index.vue";
-import { NTime } from "naive-ui";
+import { NTime, NImage } from "naive-ui";
 import type { PhotoType } from "@/apis/types/photo-type"
 import { getResourceUrl } from "@/utils/resource";
 import { useRouter } from "vue-router";

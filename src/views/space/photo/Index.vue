@@ -8,8 +8,15 @@
                     <img :src="getResourceUrl(item.url)" alt="" class="cover" @click="goPhotoDetail(item.id)">
                     <div class="info">
                         <p class="title">{{ item.name }}</p>
-                        <p class="clicks" v-if="item.is_public">公开</p>
-                        <p class="clicks" v-else>私密</p>
+                        <div>
+                            <p class="clicks" v-if="item.is_public">公开</p>
+                            <p class="clicks" v-else>私密</p>
+                        </div>
+                        <div>
+                            <p class="clicks" v-if="item.status === 0">正常</p>
+                            <p class="clicks" v-else-if="item.status === 1">审核中</p>
+                            <p class="clicks" v-else>审核不通过</p>
+                        </div>
                     </div>
                 </div>
                 <div class="my-upload-card-btn">
@@ -42,6 +49,10 @@
                 <n-select class="select" placeholder="选择相册" label-field="name" value-field="id" remote
                     v-model:value="photoInfo.album_id" :options="albumList" />
             </n-form-item>
+            <n-form-item label="选择分区">
+                <n-select class="select" placeholder="选择分区" label-field="name" value-field="id" remote
+                    v-model:value="photoInfo.partition_id" :options="partitionList" />
+            </n-form-item>
             <div class="upload-next-btn">
                 <n-button type="primary" @click="updatePhotoInfo">确定</n-button>
             </div>
@@ -60,6 +71,8 @@ import { getResourceUrl } from "@/utils/resource";
 import { NButton, NForm, NFormItem, NInput, NModal, NPagination, NSelect, NSwitch, useNotification } from 'naive-ui';
 import { onBeforeMount, reactive, ref } from 'vue';
 import { useRouter } from "vue-router";
+import type { PartitionType } from "@/apis/types/partition-type";
+import { getPartitionListAPI } from "@/apis/api/partition";
 const router = useRouter();
 const notification = useNotification();
 const pageSize = 8;
@@ -101,7 +114,8 @@ const photoInfo = reactive({
     name: '',
     desc: "",
     album_id: 0,
-    is_public: true
+    is_public: true,
+    partition_id: 0
 });
 const updateActive = ref(false);//显示编辑抽屉
 //简介输入框大小
@@ -115,6 +129,7 @@ const modifyPhoto = (item: UploadPhotoType) => {
     photoInfo.desc = item.desc;
     photoInfo.album_id = item.album;
     photoInfo.is_public = item.is_public;
+    photoInfo.partition_id = item.partition
     updateActive.value = true;
 }
 const albumList = ref<Array<AlbumType>>([]);
@@ -127,6 +142,17 @@ const ListAlbum = () => {
         }
     })
 }
+
+const partitionList = ref<Array<PartitionType>>([]);
+const ListPartition = () => {
+    getPartitionListAPI().then((res) => {
+        // let albumList: Array<AlbumType> = [];
+        if (res.data.code === statusCode.success) {
+            partitionList.value = res.data.data;
+        }
+    })
+}
+
 const updatePhotoInfo = () => {
     updatePhotoInfoAPI(photoInfo).then((res) => {
         if (res.data.code === statusCode.success) {
@@ -150,6 +176,7 @@ const updatePhotoInfo = () => {
 onBeforeMount(() => {
     getMyPhoto();
     ListAlbum();
+    ListPartition()
 })
 </script>
 
@@ -214,7 +241,14 @@ onBeforeMount(() => {
 
                 .clicks {
                     font-size: 10px;
+
+
                 }
+
+                .status {
+                    float: right;
+                }
+
             }
         }
     }

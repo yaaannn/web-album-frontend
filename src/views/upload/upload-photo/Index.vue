@@ -12,13 +12,15 @@
             </n-form-item>
             <n-form-item label="是否公开">
                 <n-switch v-model:value="photoInfo.is_public" />
-            </n-form-item>
-            <n-form-item label="是否添加水印">
-                <n-switch v-model:value="photoInfo.is_watermark" />
+
             </n-form-item>
             <n-form-item label="选择相册">
                 <n-select class="select" placeholder="选择相册" label-field="name" value-field="id" remote
                     v-model:value="photoInfo.album_id" :options="albumList" />
+            </n-form-item>
+            <n-form-item label="选择分区">
+                <n-select class="select" placeholder="选择分区" label-field="name" value-field="id" remote
+                    v-model:value="photoInfo.partition_id" :options="partitionList" />
             </n-form-item>
             <div class="upload-next-btn">
                 <n-button type="primary" @click="uploadPhotoInfo">确定</n-button>
@@ -28,14 +30,16 @@
 </template>
 
 <script setup lang="ts">
-import CoverUploader from "./component/CoverUploader.vue";
-import { NForm, NFormItem, NButton, NInput, NSwitch, NSelect } from 'naive-ui';//表单相关
-import { ref, reactive, onBeforeMount } from 'vue';
+import { listAlbumAPI } from '@/apis/api/album';
+import { getPartitionListAPI } from "@/apis/api/partition";
 import { UploadPhotoInfoAPI, } from "@/apis/api/photo";
-import { listAlbumAPI } from '@/apis/api/album'
 import type { AlbumType } from "@/apis/types/album-type";
+import type { PartitionType } from "@/apis/types/partition-type";
 import { statusCode } from '@/utils/status-code';
+import { NButton, NForm, NFormItem, NInput, NSelect, NSwitch } from 'naive-ui'; //表单相关
+import { onBeforeMount, reactive, ref } from 'vue';
 import { useRouter } from "vue-router";
+import CoverUploader from "./component/CoverUploader.vue";
 const router = useRouter();
 //简介输入框大小
 const descSize = {
@@ -46,10 +50,9 @@ const photoInfo = reactive({
     name: "",
     desc: "",
     album_id: null,
+    partition_id: null,
     url: "",
     is_public: true,
-    is_watermark: false,
-
 })
 
 //封面上传完成
@@ -79,8 +82,19 @@ const ListAlbum = () => {
     })
 }
 
+const partitionList = ref<Array<PartitionType>>([]);
+const ListPartition = () => {
+    getPartitionListAPI().then((res) => {
+        // let albumList: Array<AlbumType> = [];
+        if (res.data.code === statusCode.success) {
+            partitionList.value = res.data.data;
+        }
+    })
+}
+
 onBeforeMount(() => {
     ListAlbum()
+    ListPartition()
 },
 
 )

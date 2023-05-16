@@ -9,9 +9,10 @@
                     <th>预览</th>
                     <th>标题</th>
                     <th>简介</th>
-                    <th>状态</th>
+                    <th>隐私</th>
                     <th>作者</th>
                     <th>上传时间</th>
+                    <th>审核状态</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -29,7 +30,20 @@
                     <td>
                         <n-time :time="new Date(item.create_time * 1000)" />
                     </td>
+                    <td>
+                        <span v-if="item.status === 0">正常</span>
+                        <span v-else-if="item.status === 1">审核中</span>
+                        <span v-else>审核不通过</span>
+                    </td>
                     <td class="btn-list">
+
+                        <n-popconfirm positive-text="通过" negative-text="不通过" @positive-click="auditPhoto(item.id, 0)"
+                            @negative-click="auditPhoto(item.id, 2)">
+                            <template #trigger>
+                                <n-button text>审核</n-button>
+                            </template>
+                            是否通过审核
+                        </n-popconfirm>
                         <n-button text @click="deletePhoto(item.id)">删除</n-button>
                     </td>
                 </tr>
@@ -44,8 +58,8 @@
 <script setup lang="ts">
 
 import { onBeforeMount, ref } from 'vue';
-import { NTable, NButton, NCard, NTime, NPagination, useNotification } from 'naive-ui';
-import { deletePhotoAPI, getPhotoListAPI } from '@/apis/admin/api/admin';
+import { NTable, NButton, NCard, NTime, NPagination, useNotification, NPopconfirm } from 'naive-ui';
+import { auditPhotoAPI, deletePhotoAPI, getPhotoListAPI } from '@/apis/admin/api/admin';
 import { getResourceUrl } from '@/utils/resource';
 import { statusCode } from '@/utils/status-code';
 import type { PhotoType } from '@/apis/admin/types/photo-type';
@@ -83,6 +97,23 @@ const deletePhoto = (id: number) => {
     }).catch(() => {
         notification.error({
             title: '删除失败',
+            duration: 5000,
+        })
+    })
+}
+
+const auditPhoto = (id: number, status: number) => {
+    auditPhotoAPI(id, status).then((res) => {
+        if (res.data.code === statusCode.success) {
+            notification.success({
+                title: '审核成功',
+                duration: 5000,
+            })
+            getPhotoList();
+        }
+    }).catch(() => {
+        notification.error({
+            title: '审核失败',
             duration: 5000,
         })
     })

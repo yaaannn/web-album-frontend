@@ -111,7 +111,7 @@ onBeforeMount(() => {
         align-items: center;
         height: 100%;
         width: 220px;
-        padding-left: 20px;
+        padding-left: 30px;
     }
 
 
@@ -125,7 +125,7 @@ onBeforeMount(() => {
     }
 
     .header-user-info {
-        width: 280px;
+        width: 200px;
         display: flex;
         align-items: center;
 
