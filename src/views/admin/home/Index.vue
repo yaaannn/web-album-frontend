@@ -117,6 +117,19 @@ const menuOptions = [
                 { default: () => '分区管理' }
             ),
         key: "admin_partition",
+    },
+    {
+        label: () =>
+            h(
+                RouterLink,
+                {
+                    to: {
+                        name: "AdminKeywords",
+                    }
+                },
+                { default: () => '敏感词管理' }
+            ),
+        key: "admin_keywords",
     }
 ];
 
@@ -130,6 +143,8 @@ const routeNameToKey = () => {
             return "admin_comment";
         case "AdminPartition":
             return "admin_partition";
+        case "AdminKeywords":
+            return "admin_keywords";
         default:
             return "";
     }

@@ -3,7 +3,6 @@
     <div class="picture-item" :style="initTheme()">
         <div class="img">
             <img :src="getResourceUrl(props.info.url)" alt="">
-            <!-- <img src="http://localhost:8080/ipfs/QmepiQufyaPZtCKqzXiSNmK9DNQBHKoKKwTDPzK4szfU9X" alt='' /> -->
         </div>
         <div class="picture-info">
             <span class="title" @click="goPhotoDetail(props.info.id)">{{ props.info.name }}</span>

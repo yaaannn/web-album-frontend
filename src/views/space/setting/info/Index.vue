@@ -7,9 +7,6 @@
                 <common-avatar class="avatar" :url="getResourceUrl(userInfo.avatar || '')" :size="60"
                     @click="avatarClick"></common-avatar>
             </div>
-            <!-- <n-form-item label="用户名:">
-                <p class="uid form-item">{{ userInfo.username }}</p>
-            </n-form-item> -->
             <n-form-item label="昵称:">
                 <n-input class="form-input name" v-model:value="userInfo.nickname" placeholder="请输入昵称" maxlength="10"
                     show-count />

@@ -4,7 +4,7 @@ import {
     globalConfig as config,
 } from "@/utils/global-config";
 import { storageData as storage } from "@/utils/stored-data";
-const baseURL = config.domain ? `http${config.https ? 's' : ''}://${config.domain}` : '';
+const baseURL = `http://${config.domain}`;
 
 const service: AxiosInstance = axios.create({
     baseURL: `${baseURL}/api/`,

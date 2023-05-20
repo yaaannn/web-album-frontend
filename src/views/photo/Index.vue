@@ -18,7 +18,7 @@
                     <div class="photo-toolbar">
                         <div class="toolbar-left">
                             <div class="archive-item">
-                                <n-icon :class="[likeAnimation, is_like ? 'active' : 'icon']" @click="likeClick">
+                                <n-icon :class="[is_like ? 'active' : 'icon']" @click="likeClick">
                                     <svg t="1655271860793" viewBox="0 0 1024 1024" version="1.1"
                                         xmlns="http://www.w3.org/2000/svg" p-id="1802">
                                         <path d="M939.517328 410.237436h-272.638296C772.478372 19.839876 591.9995 0 591.9995 0c-73.59954 0-58.239636 59.519628-63.9996 
@@ -98,12 +98,10 @@ const likeClick = () => {
         //调用点赞接口
         likeAPI(id).then((res) => {
             if (res.data.code === statusCode.success) {
-                likeAnimation.value = 'like-active';
+                // likeAnimation.value = 'like-active';
                 like.value++;
             }
         })
-        // likeAnimation.value = 'like-active';
-        // like.value++;
     } else {
         cancelLikeAPI(id);
         like.value--;

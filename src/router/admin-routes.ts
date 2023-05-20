@@ -31,6 +31,12 @@ export const adminRoutes: RouteRecordRaw = {
             name: "AdminPartition",
             meta: { admin: true },
             component: () => import("../views/admin/partition/Index.vue"),
+        },
+        {
+            path: "/admin/keywords",
+            name: "AdminKeywords",
+            meta: { admin: true },
+            component: () => import("../views/admin/keywords/Index.vue"),
         }
     ]
 }

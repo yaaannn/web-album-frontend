@@ -61,3 +61,13 @@ export const updatePartitionAPI = (id: number, name: string) => {
 export const deletePartitionAPI = (id: number) => {
     return request.post(`v1/partition/delete`,{ id })
 }
+
+// 敏感词相关
+
+export const getSensitiveWordListAPI = () => {
+    return request.get('v1/public/sensitive/list')
+}
+
+export const addSensitiveWordAPI = (word: string) => {
+    return request.post('v1/public/sensitive/add', {"keyword": word })
+}
