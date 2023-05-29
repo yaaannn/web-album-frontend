@@ -47,7 +47,7 @@
 
 
   </div>
-  <silder-captcha v-model:show="show" @success="passCheck"></silder-captcha>
+  <slider-captcha v-model:show="show" @success="passCheck"></slider-captcha>
 </template>
 
 <script setup lang="ts">
@@ -56,10 +56,10 @@ import type { UserLoginType, UserRegisterType } from "@/apis/types/user-type";
 import { getUserInfoAPI, loginAPI, registerAPI } from "@/apis/api/user";
 import { statusCode } from '@/utils/status-code';
 import { storageData } from "@/utils/stored-data";
-import type { FormRules } from 'naive-ui';
+import type { FormItemRule, FormRules } from 'naive-ui';
 import { NButton, NForm, NFormItem, NInput, NTabPane, NTabs, useNotification } from 'naive-ui';
 import router from "@/router";
-import SilderCaptcha from "@/components/slider-captcha/Index.vue";
+import SliderCaptcha from "@/components/slider-captcha/Index.vue";
 const emits = defineEmits(["changeForm", "success"]);
 const show = ref(false);
 const is_login_checked = ref(false);
@@ -92,7 +92,20 @@ const rules: FormRules = {
     { type: "email", message: "请输入正确的邮箱地址", trigger: ['blur', 'input'] },
   ],
   username: { required: true, message: '请输入用户名', trigger: ['blur', 'input'] },
-  password: { required: true, message: '请输入密码', trigger: ['blur', 'input'] },
+  password: {
+    required: true, validator(rule: FormItemRule, value: string) {
+      if (!value) {
+        return new Error('请输入密码')
+      } else if (value.length < 6) {
+        return new Error('密码长度不能小于6位')
+      } else if (value.length > 18) {
+        return new Error('密码长度不能大于18位')
+      } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+        return new Error('密码格式不正确')
+      }
+      return true
+    }, trigger: ['blur', 'input']
+  },
 }
 
 const checkSliderCaptcha = () => {
@@ -163,6 +176,7 @@ const findPassword = () => {
   let findPasswordUrl = router.resolve({ name: "FindPassword" });
   window.open(findPasswordUrl.href, '_blank');
 }
+
 </script>
 
 <style lang="less" scoped>

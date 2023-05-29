@@ -34,6 +34,8 @@
                             </div>
                         </div>
                         <div class="toolbar-right">
+                            <!-- 下载图片 -->
+                            <a :href="getResourceUrl(photoInfo!.url)" download="photo">下载</a>
                             <span>1 人在看</span>
                             <span>{{ photoInfo?.click }} 浏览量</span>
                             <span>上传时间

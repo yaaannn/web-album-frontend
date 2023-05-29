@@ -12,8 +12,8 @@
                 <div class="home-recommended">
                     <picture-item v-for="item in pictureList" :info="item"></picture-item>
                 </div>
-                <n-pagination style="justify-content: center; " v-model:page="page" :item-count="count" :page-size="8"
-                    @update-page="pageChange" />
+                <n-pagination style="justify-content: center; " v-model:page="page" :item-count="count"
+                    :page-size="pageSize" @update-page="pageChange" />
             </div>
         </div>
     </div>
