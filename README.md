@@ -1,5 +1,7 @@
 # 网络相册前端
 
+后端项目地址 [网络相册后端](https://github.com/yaaannn/web-album-backend)
+
 > 前置条件
 
 运行前，请确保已经成功安装了 Node.js、pnpm 等环境
