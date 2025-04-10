@@ -1,9 +1,20 @@
-### github
-https://github.com/yaaannn/web-album-frontend.git
+# 网络相册前端
 
-### gitee
-https://gitee.com/yaaannn/web-album-frontend.git
+> 前置条件
 
-### TODO
-1. 分区
-2. 审核（人工）
+运行前，请确保已经成功安装了 Node.js、pnpm 等环境
+
+> 重要信息
+
+前端项目需要依赖后端项目进行运行，请确保后端项目已经成功运行，前端默认运行端口为`5173`
+本说明文档中所有的命令均在 Unix 系统下测试通过，Windows 用户请自行修改命令
+
+### 运行说明
+
+1. 命令行进入到当前目录
+
+2. 首次运行需要执行`pnpm install` 安装项目依赖
+
+3. 命令行输入`pnpm run dev`启动项目并检查功能是否正常
+
+4. 浏览器访问`http://localhost:5173`，查看项目是否正常运行
